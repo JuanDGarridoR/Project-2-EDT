@@ -56,8 +56,7 @@ import seaborn as sns
 print("\nLoading dataset...\n")
 
 df = pd.read_csv(
-    "data/dataset_8bands.tsv",
-    sep="\t"
+    "data/dataset_8bands.csv",
 )
 
 # ==========================================
@@ -122,6 +121,15 @@ models = {
     ),
 
     # ======================================
+    # ARTIFICIAL NEURAL NETWORK
+    # ======================================
+
+    "ANN": MLPClassifier(
+        hidden_layer_sizes=(100,),
+        max_iter=500,
+    ),
+
+    # ======================================
     # K-NEAREST NEIGHBOR
     # ======================================
 
@@ -135,14 +143,6 @@ models = {
 
     "NaiveBayes": GaussianNB(),
 
-    # ======================================
-    # ARTIFICIAL NEURAL NETWORK
-    # ======================================
-
-    "ANN": MLPClassifier(
-        hidden_layer_sizes=(100,),
-        max_iter=500,
-    ),
 }
 
 # ==========================================

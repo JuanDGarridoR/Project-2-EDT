@@ -15,10 +15,9 @@ from sklearn.preprocessing import StandardScaler
 
 print("\nLoading dataset...\n")
 
-# Read TSV file
+# Read CSV file
 df = pd.read_csv(
-    "data/dataset_8bands.tsv",
-    sep="\t"
+    "data/dataset_8bands.csv",
 )
 
 # Show first rows
