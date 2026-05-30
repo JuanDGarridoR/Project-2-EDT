@@ -38,6 +38,8 @@ from sklearn.metrics import (
     confusion_matrix,
     classification_report,
     f1_score,
+    precision_score,
+    recall_score,
     cohen_kappa_score,
 )
 
@@ -187,15 +189,27 @@ for name, model in models.items():
         y_pred
     )
 
-    f1 = f1_score(
+    kappa = cohen_kappa_score(
+        y_test,
+        y_pred
+    )
+
+    precision = precision_score(
         y_test,
         y_pred,
         average="weighted"
     )
 
-    kappa = cohen_kappa_score(
+    recall = recall_score(
         y_test,
-        y_pred
+        y_pred,
+        average="weighted"
+    )
+
+    f1 = f1_score(
+        y_test,
+        y_pred,
+        average="weighted"
     )
 
     # ======================================
@@ -206,8 +220,10 @@ for name, model in models.items():
         {
             "Model": name,
             "Accuracy": accuracy,
-            "F1-Score": f1,
             "Kappa": kappa,
+            "Precision": precision,
+            "Recall": recall,
+            "F1-Score": f1,
         }
     )
 
@@ -271,6 +287,8 @@ for name, model in models.items():
 # ==========================================
 
 results_df = pd.DataFrame(results)
+
+results_df = results_df.round(4)
 
 print("\n====================================")
 print("FINAL RESULTS")
