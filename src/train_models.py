@@ -95,7 +95,7 @@ X_scaled = scaler.fit_transform(X)
 X_train, X_test, y_train, y_test = train_test_split(
     X_scaled,
     y,
-    test_size=0.2,
+    test_size=0.3,
     random_state=42,
     stratify=y,
 )
@@ -111,7 +111,10 @@ models = {
     # ======================================
 
     "DecisionTree": DecisionTreeClassifier(
-        max_depth=10
+        max_depth=15,
+        min_samples_split=5,
+        min_samples_leaf=2,
+        random_state=42,
     ),
 
     # ======================================
@@ -119,7 +122,10 @@ models = {
     # ======================================
 
     "SVM": SVC(
-        kernel="rbf"
+        kernel="rbf",
+        C=10,
+        gamma="scale",
+        probability=False,
     ),
 
     # ======================================
@@ -127,8 +133,13 @@ models = {
     # ======================================
 
     "ANN": MLPClassifier(
-        hidden_layer_sizes=(100,),
-        max_iter=500,
+        hidden_layer_sizes=(150, 100, 50),
+        activation="relu",
+        solver="adam",
+        alpha=0.0001,
+        learning_rate="adaptive",
+        max_iter=2000,
+        random_state=42,
     ),
 
     # ======================================
@@ -136,14 +147,19 @@ models = {
     # ======================================
 
     "KNN": KNeighborsClassifier(
-        n_neighbors=5
+        n_neighbors=7,
+        weights="distance",
+        metric="minkowski",
+        p=2,
     ),
 
     # ======================================
     # NAIVE BAYES
     # ======================================
 
-    "NaiveBayes": GaussianNB(),
+    "NaiveBayes": GaussianNB(
+        var_smoothing=1e-8
+    ),
 
 }
 
