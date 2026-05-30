@@ -56,7 +56,7 @@ import seaborn as sns
 print("\nLoading dataset...\n")
 
 df = pd.read_csv(
-    "data/project2_dataset_8bands.csv",
+    "data/dataset.csv",
 )
 
 # ==========================================

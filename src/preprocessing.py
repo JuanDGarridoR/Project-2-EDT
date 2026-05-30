@@ -17,7 +17,7 @@ print("\nLoading dataset...\n")
 
 # Read CSV file
 df = pd.read_csv(
-    "data/project2_dataset_8bands.csv",
+    "data/dataset.csv",
 )
 
 # Show first rows
