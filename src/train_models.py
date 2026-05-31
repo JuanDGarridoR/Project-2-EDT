@@ -6,6 +6,10 @@
 
 import pandas as pd
 
+import os
+
+import joblib
+
 # SPLIT + NORMALIZATION
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -87,6 +91,25 @@ y = df["class"]
 scaler = StandardScaler()
 
 X_scaled = scaler.fit_transform(X)
+
+# ==========================================
+# CREATE DIRECTORIES
+# ==========================================
+
+os.makedirs("models", exist_ok=True)
+os.makedirs("outputs/confusion_matrices", exist_ok=True)
+os.makedirs("outputs/metrics", exist_ok=True)
+
+# ==========================================
+# SAVE SCALER
+# ==========================================
+
+joblib.dump(
+    scaler,
+    "models/scaler.pkl"
+)
+
+print("Scaler saved.")
 
 # ==========================================
 # TRAIN / TEST SPLIT
@@ -187,6 +210,19 @@ for name, model in models.items():
         X_train,
         y_train
     )
+    
+    # ======================================
+    # SAVE BEST MODEL (ANN)
+    # ======================================
+
+    if name == "ANN":
+
+        joblib.dump(
+            model,
+            "models/ann_model.pkl"
+        )
+
+        print("ANN model saved.")
 
     # ======================================
     # PREDICTIONS
