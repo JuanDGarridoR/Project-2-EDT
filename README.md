@@ -38,10 +38,16 @@ Guardar el archivo:
 data/dataset_8bands.csv
 ```
 
-## 5. Ejecutar el proyecto
+## 5. Entrenar modelos
 
 ```powershell
 python src/train_models.py
+```
+
+## 6. Crear mapa clasificado
+
+```powershell
+python src/predict_raster.py
 ```
 
 ## Resultados
